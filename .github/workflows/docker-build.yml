@@ -30,6 +30,7 @@ jobs:
         pytorch:
           - "2.0.1"
           - "2.1.1"
+          - "2.1.2"
     steps:
       -
         name: Free Space
@@ -74,7 +75,7 @@ jobs:
         with:
           context: build
           build-args: |
-            IMAGE_BASE=ghcr.io/ai-dock/${{ matrix.base }}:${{ matrix.pytorch }}-py${{ matrix.python }}-cpu-${{ env.UBUNTU_VERSION }}
+            IMAGE_BASE=ghcr.io/ponzienjoyer/${{ matrix.base }}:${{ matrix.pytorch }}-py${{ matrix.python }}-cpu-${{ env.UBUNTU_VERSION }}
           push: true
           # Avoids unknown/unknown architecture and extra metadata
           provenance: false
@@ -93,11 +94,13 @@ jobs:
         pytorch:
           - "2.0.1"
           - "2.1.1"
+          - "2.1.2"
         cuda:
           - "11.8.0"
           - "12.1.0"
         level:
           - "base"
+          - "cudnn8-devel"
         exclude:
           - cuda: "12.1.0"
             pytorch: "2.0.1"
@@ -145,7 +148,7 @@ jobs:
         with:
           context: build
           build-args: |
-            IMAGE_BASE=ghcr.io/ai-dock/${{ matrix.base }}:${{ matrix.pytorch }}-py${{ matrix.python }}-cuda-${{ matrix.cuda }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
+            IMAGE_BASE=ghcr.io/ponzienjoyer/${{ matrix.base }}:${{ matrix.pytorch }}-py${{ matrix.python }}-cuda-${{ matrix.cuda }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
             PYTORCH_VERSION=${{ matrix.pytorch }}
           push: true
           provenance: false
@@ -164,6 +167,7 @@ jobs:
         pytorch:
           - "2.0.1"
           - "2.1.1"
+          - "2.1.2"
         rocm:
           - "5.4.2"
           - "5.6"
@@ -219,7 +223,7 @@ jobs:
         with:
           context: build
           build-args: |
-            IMAGE_BASE=ghcr.io/ai-dock/${{ matrix.base }}:${{ matrix.pytorch }}-py${{ matrix.python }}-rocm-${{ matrix.rocm }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
+            IMAGE_BASE=ghcr.io/ponzienjoyer/${{ matrix.base }}:${{ matrix.pytorch }}-py${{ matrix.python }}-rocm-${{ matrix.rocm }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
           push: true
           provenance: false
           tags: ${{ env.TAGS }}
